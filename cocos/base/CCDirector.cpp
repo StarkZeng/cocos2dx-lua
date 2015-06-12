@@ -262,7 +262,8 @@ void Director::drawScene()
     {
         _openGLView->pollEvents();
     }
-
+    
+    
     //tick before glClear: issue #533
     if (! _paused)
     {
