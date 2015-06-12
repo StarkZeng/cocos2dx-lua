@@ -389,7 +389,6 @@
 			buildPhases = (
 				1A0EE42418CDF799004CD58F /* Sources */,
 				1A0EE42B18CDF799004CD58F /* Frameworks */,
-				1529F07C19EDA3860064B9B1 /* ShellScript */,
 				1A0EE43B18CDF799004CD58F /* Resources */,
 			);
 			buildRules = (
@@ -496,22 +495,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		1529F07C19EDA3860064B9B1 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#!/bin/bash\ncocos_dir=${SRCROOT}/../tests/lua-empty-test/src/cocos\nif [ -d \"${cocos_dir}\" ]; then\nrm -rv \"${cocos_dir}\"\nmkdir \"${cocos_dir}\"\nelse\nmkdir \"${cocos_dir}\"\nfi\n\ncp -r \"${SRCROOT}/../cocos/scripting/lua-bindings/script/\" \"${cocos_dir}\"";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1A0EE42418CDF799004CD58F /* Sources */ = {
