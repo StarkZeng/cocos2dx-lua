@@ -53,6 +53,10 @@ public:
      * @return the instance of LuaEngine.
      */
     static LuaEngine* getInstance(void);
+    
+    #ifdef COCOS2DX_ENGINE_PATCH
+    void update(float dt);
+    #endif
     /**
      * Get defaultEngine of LuaEngine, it was deprecated.
      *
@@ -209,6 +213,7 @@ private:
     : _stack(nullptr)
     {
     }
+    
     bool init(void);
     int handleNodeEvent(void* data);
     int handleMenuClickedEvent(void* data);
@@ -234,6 +239,10 @@ private:
 private:
     static LuaEngine* _defaultEngine;
     LuaStack *_stack;
+    #ifdef COCOS2DX_ENGINE_PATCH
+    Scheduler *_scheduler;          ///< scheduler used to schedule timers and updates
+    bool _running;//is Game running
+    #endif
 };
 
 NS_CC_END

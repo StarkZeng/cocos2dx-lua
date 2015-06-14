@@ -56,9 +56,25 @@ LuaEngine::~LuaEngine(void)
 bool LuaEngine::init(void)
 {
     _stack = LuaStack::create();
+
     _stack->retain();
+    
+#ifdef COCOS2DX_ENGINE_PATCH
+    _running = true;
+    _scheduler = Director::getInstance()->getScheduler();
+    _scheduler->retain();
+    _scheduler->scheduleUpdate(this, 0, !_running);
+#endif
+    
     return true;
 }
+
+#ifdef COCOS2DX_ENGINE_PATCH
+void LuaEngine::update(float dt)
+{
+    printf("%f\n",dt);
+}
+#endif
 
 void LuaEngine::addSearchPath(const char* path)
 {
