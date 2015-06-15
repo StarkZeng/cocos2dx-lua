@@ -341,6 +341,8 @@ int LuaStack::executeGlobalFunction(const char* functionName)
     return executeFunction(0);
 }
 
+
+
 void LuaStack::clean(void)
 {
     lua_settop(_state, 0);

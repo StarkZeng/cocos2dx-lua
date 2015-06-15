@@ -137,6 +137,7 @@ public:
      * @return The integer value returned from the script function.
      */
     virtual int executeGlobalFunction(const char* functionName);
+
     
     /**
      * Set the stack top index 0.

@@ -79,6 +79,12 @@ typedef union {
 } LuaValueField;
 /// @endcond
 
+
+typedef struct {
+    LuaValueField value;
+    LuaValueType type;
+}LuaFuncParam;
+
 /**
  * Wrap different general types of data into a same specific type named LuaValue.
  * The general types supported as follows:int,float,bool,std::string,const char*,LuaValueDict,LuaValueArray,Ref.

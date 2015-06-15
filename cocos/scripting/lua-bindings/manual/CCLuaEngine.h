@@ -54,7 +54,7 @@ public:
      */
     static LuaEngine* getInstance(void);
     
-    #ifdef COCOS2DX_ENGINE_PATCH
+    #ifdef COCOS2DX_GOLBAL_UPDATE
     void update(float dt);
     #endif
     /**
@@ -156,6 +156,7 @@ public:
      * @return The integer value returned from the script function.
      */
     virtual int executeGlobalFunction(const char* functionName) override;
+
     virtual int executeNodeEvent(Node* pNode, int nAction);
     virtual int executeMenuItemEvent(MenuItem* pMenuItem);
     virtual int executeNotificationEvent(__NotificationCenter* pNotificationCenter, const char* pszName);
@@ -239,7 +240,7 @@ private:
 private:
     static LuaEngine* _defaultEngine;
     LuaStack *_stack;
-    #ifdef COCOS2DX_ENGINE_PATCH
+    #ifdef COCOS2DX_GOLBAL_UPDATE
     Scheduler *_scheduler;          ///< scheduler used to schedule timers and updates
     bool _running;//is Game running
     #endif

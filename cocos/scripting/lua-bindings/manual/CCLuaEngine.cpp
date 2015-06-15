@@ -59,7 +59,7 @@ bool LuaEngine::init(void)
 
     _stack->retain();
     
-#ifdef COCOS2DX_ENGINE_PATCH
+#ifdef COCOS2DX_GOLBAL_UPDATE
     _running = true;
     _scheduler = Director::getInstance()->getScheduler();
     _scheduler->retain();
@@ -69,10 +69,20 @@ bool LuaEngine::init(void)
     return true;
 }
 
-#ifdef COCOS2DX_ENGINE_PATCH
+#ifdef COCOS2DX_GOLBAL_UPDATE
 void LuaEngine::update(float dt)
 {
-    printf("%f\n",dt);
+    
+    lua_getglobal(_stack->getLuaState(), "update");
+    if (!lua_isfunction(_stack->getLuaState(), -1))
+    {
+        CCLOG("[LUA ERROR] name '%s' does not represent a Lua function", "update");
+        lua_pop(_stack->getLuaState(), 1);
+        return;
+    }
+    
+    _stack->pushFloat(dt);
+    _stack->executeFunction(1);
 }
 #endif
 
@@ -117,6 +127,8 @@ int LuaEngine::executeGlobalFunction(const char* functionName)
     _stack->clean();
     return ret;
 }
+
+
 
 int LuaEngine::executeNodeEvent(Node* pNode, int nAction)
 {
