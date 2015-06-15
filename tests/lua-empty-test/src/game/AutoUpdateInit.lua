@@ -20,7 +20,7 @@ local function initGLView()
     local director = cc.Director:getInstance()
     local glView = director:getOpenGLView()
     if nil == glView then
-        glView = cc.GLViewImpl:create("Game")
+        glView = cc.GLViewImpl:create("Lua Empty Test")
         director:setOpenGLView(glView)
     end
 
