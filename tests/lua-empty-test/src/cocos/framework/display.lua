@@ -26,6 +26,9 @@ local display = {}
 
 local director = cc.Director:getInstance()
 local view = director:getOpenGLView()
+assert(director:getOpenGLView(),"glView is nil");
+--[[
+---for iphone ，we alreay init glview in oc code 
 
 if not view then
     local width = 960
@@ -41,11 +44,26 @@ if not view then
     view = cc.GLViewImpl:createWithRect("Cocos2d-Lua", cc.rect(0, 0, width, height))
     director:setOpenGLView(view)
 end
+]]
 
 local framesize = view:getFrameSize()
 local textureCache = director:getTextureCache()
 local spriteFrameCache = cc.SpriteFrameCache:getInstance()
 local animationCache = cc.AnimationCache:getInstance()
+
+
+print("------------ framesize",framesize.width, framesize.height);
+
+if(nil == CC_DESIGN_RESOLUTION)then
+    CC_DESIGN_RESOLUTION = 
+    {
+        width = framesize.width;
+        height = framesize.height;
+        autoscale = "SHOW_ALL";
+    };
+end
+
+
 
 -- auto scale
 local function checkResolution(r)

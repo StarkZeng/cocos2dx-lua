@@ -1,12 +1,16 @@
 cc.FileUtils:getInstance():addSearchPath("src")
 cc.FileUtils:getInstance():addSearchPath("res")
 -- CC_USE_DEPRECATED_API = true
+require "game.config"
 require "cocos.init"
 
 
+cc.exports.update = function(dt)
+    --print("update dt",dt);
+end
 
 -- cclog
-cclog = function(...)
+cc.exports.cclog = function(...)
     print(string.format(...))
 end
 
@@ -18,44 +22,16 @@ function __G__TRACKBACK__(msg)
     cclog("----------------------------------------")
 end
 
-local function initCollectGarbage()
-    collectgarbage("setpause", 100)
-    collectgarbage("setstepmul", 5000)
-end
 
-local function initGLView()
-    local director = cc.Director:getInstance()
-    local glView = director:getOpenGLView()
-    if nil == glView then
-        glView = cc.GLViewImpl:create("Lua Empty Test")
-        director:setOpenGLView(glView)
-    end
-
-    director:setOpenGLView(glView)
-
-    glView:setDesignResolutionSize(480, 320, cc.ResolutionPolicy.NO_BORDER)
-
-    --turn on display FPS
-    director:setDisplayStats(true)
-
-    --set FPS. the default value is 1.0/60 if you don't call this
-    director:setAnimationInterval(1.0 / 60)
-end
 
 local function main()
-    -- avoid memory leak
-    
-
-    initGLView()
-
-    require "hello2"
-    cclog("result is " .. myadd(1, 1))
-
-    ---------------
 
     local visibleSize = cc.Director:getInstance():getVisibleSize()
     local origin = cc.Director:getInstance():getVisibleOrigin()
 
+
+    print("----- origin",origin.x,origin.y);
+    print("----- visibleSize",visibleSize.width,visibleSize.height);
     -- add the moving dog
     local function creatDog()
         local frameWidth = 105
@@ -106,7 +82,11 @@ local function main()
 
         -- add in farm background
         local bg = cc.Sprite:create("farm.jpg")
-        bg:setPosition(origin.x + visibleSize.width / 2 + 80, origin.y + visibleSize.height / 2)
+        --bg:setAnchorPoint(0,0);
+        bg:setScale(2,2)
+        bg:setPosition(origin.x + visibleSize.width / 2 , origin.y + visibleSize.height / 2)
+        
+        --bg:setPosition(0,0);
         layerFarm:addChild(bg)
 
         -- add land sprite
@@ -226,4 +206,27 @@ local function main()
     cc.Director:getInstance():runWithScene(sceneGame)
 end
 
-xpcall(main, __G__TRACKBACK__)
+
+
+local function init()
+    local director = cc.Director:getInstance();
+    
+    -- avoid memory leak
+    collectgarbage("setpause", 100)
+    collectgarbage("setstepmul", 5000)
+
+    --turn on display FPS
+    if(CC_SHOW_FPS)then
+        director:setDisplayStats(true)
+    end
+
+    --set FPS. the default value is 1.0/60 if you don't call this
+    director:setAnimationInterval(1.0 / 60)
+
+    main();
+end
+
+
+xpcall(init, __G__TRACKBACK__)
+
+

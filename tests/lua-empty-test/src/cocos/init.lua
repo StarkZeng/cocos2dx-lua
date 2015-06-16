@@ -63,10 +63,12 @@ require "cocos.cocos2d.DrawPrimitives"
 require "cocos.cocos2d.bitExtend"
 
 -- CCLuaEngine
+if(CC_USE_DEPRECATED_API)then
 require "cocos.cocos2d.DeprecatedCocos2dClass"
 require "cocos.cocos2d.DeprecatedCocos2dEnum"
 require "cocos.cocos2d.DeprecatedCocos2dFunc"
 require "cocos.cocos2d.DeprecatedOpenglEnum"
+end
 
 -- register_cocostudio_module
 if nil ~= ccs then
@@ -79,8 +81,10 @@ end
 require "cocos.cocosbuilder.DeprecatedCocosBuilderClass"
 
 -- register_cocosdenshion_module
+if(CC_USE_DEPRECATED_API)then
 require "cocos.cocosdenshion.DeprecatedCocosDenshionClass"
 require "cocos.cocosdenshion.DeprecatedCocosDenshionFunc"
+end
 
 -- register_extension_module
 require "cocos.extension.DeprecatedExtensionClass"

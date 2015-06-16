@@ -775,9 +775,9 @@ std::string FileUtils::fullPathForFilename(const std::string &filename)
         }
     }
     
-    if(isPopupNotify()){
-        CCLOG("cocos2d: fullPathForFilename: No file found at %s. Possible missing file.", filename.c_str());
-    }
+    //if(isPopupNotify()){
+   //     CCLOG("cocos2d: fullPathForFilename: No file found at %s. Possible missing file.", filename.c_str());
+   // }
 
     // The file wasn't found, return empty string.
     return "";
